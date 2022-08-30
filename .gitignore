@@ -25,4 +25,5 @@
 *.out
 *.app
 
+/.vs/
 /release/
