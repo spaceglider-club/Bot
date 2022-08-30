@@ -48,7 +48,11 @@ namespace API
 		Vector::Vector2<float> screen_position	= { 0.0f, 0.0f };
 	};
 
+	void LoadLocalPlayer(LocalPlayer &local_player);
+	void LoadEnemyPlayer(EnemyPlayer &enemy_player);
 
+	void UpdateLocalPlayer(LocalPlayer& local_player);
+	void UpdateEnemyPlayer(EnemyPlayer& enemy_player);
 
 }
 
