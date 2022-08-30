@@ -25,6 +25,5 @@
 *.out
 *.app
 
-/.vs/
 /release/
 /.vs/
