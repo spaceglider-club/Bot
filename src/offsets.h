@@ -16,7 +16,7 @@ namespace Offsets
 	// Renderer Constants
 
 	inline constexpr PTR kRenderer = 0x314B90C;
-	inline constexpr PTR kRendererWidth	= 0x8;
+	inline constexpr PTR kRendererWidth = 0x8;
 	inline constexpr PTR kRendererHeight = 0xC;
 
 	// List Constants
