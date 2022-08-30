@@ -13,9 +13,5 @@
 
 int __cdecl main(void*)
 {
-
-
-	printf("%f", vec2.x);
-
 	return 0;
 }
