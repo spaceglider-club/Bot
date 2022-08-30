@@ -7,13 +7,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\api.cc" />
     <ClCompile Include="src\interface.cc" />
     <ClCompile Include="src\main.cc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\api.h" />
     <ClInclude Include="src\interface.h" />
     <ClInclude Include="src\macro.h" />
     <ClInclude Include="src\offsets.h" />
+    <ClInclude Include="src\vector.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

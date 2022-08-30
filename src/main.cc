@@ -6,14 +6,16 @@
 
 #include "interface.h"
 #include "offsets.h"
+#include "vector.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 
 int __cdecl main(void*)
 {
-	
 
+
+	printf("%f", vec2.x);
 
 	return 0;
 }
