@@ -12,11 +12,7 @@
 
 int __cdecl main(void*)
 {
-	Interface * cInterface = new Interface();
-	cInterface->Setup();
-
-
-	printf("%x", cInterface->process_id);
+	
 
 
 	return 0;
