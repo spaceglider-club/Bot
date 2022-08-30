@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32819.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "spaceglider", "spaceglider.vcxproj", "{54B3075D-7BD8-48D5-BA1C-A3F8A1066526}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		release|x86_x64 (win32) = release|x86_x64 (win32)
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{54B3075D-7BD8-48D5-BA1C-A3F8A1066526}.release|x86_x64 (win32).ActiveCfg = release|Win32
+		{54B3075D-7BD8-48D5-BA1C-A3F8A1066526}.release|x86_x64 (win32).Build.0 = release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FB74123C-2AAA-45EF-A9BB-094E7077DF1B}
+	EndGlobalSection
+EndGlobal
