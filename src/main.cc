@@ -7,11 +7,17 @@
 #include "interface.h"
 #include "offsets.h"
 #include "vector.h"
+#include "cobject.h"
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <iostream>
+#include <string_view>
 
 int __cdecl main(void*)
 {
-	return 0;
+	Interface->Setup();
+
+	CObject->GetAttackSpeedOffset();
+	printf("0x%x\n", CObject->kAttackSpeedOffset);
 }

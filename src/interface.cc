@@ -6,14 +6,14 @@
 #include <tlhelp32.h>
 #include <comdef.h>
 
-void Interface::Setup()
+void cInterface::Setup()
 {
 	this->GetProcessId();
 	this->OpenProcessHandle();
 	this->GetProcessAddress();
 }
 
-void Interface::GetProcessId()
+void cInterface::GetProcessId()
 {
 	PROCESSENTRY32 entry;
 	entry.dwSize = sizeof(PROCESSENTRY32);
@@ -34,12 +34,12 @@ void Interface::GetProcessId()
 	CloseHandle(snapshot);
 }
 
-void Interface::OpenProcessHandle()
+void cInterface::OpenProcessHandle()
 {
 	this->process_handle = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_OPERATION | PROCESS_VM_READ | PROCESS_ALL_ACCESS, FALSE, this->process_id);
 }
 
-void Interface::GetProcessAddress()
+void cInterface::GetProcessAddress()
 {
 	uintptr_t modBaseAddr = 0;
 	HANDLE hSnap = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32, this->process_id);
@@ -51,7 +51,6 @@ void Interface::GetProcessAddress()
 		{
 			do
 			{
-
 				this->process_address = (uintptr_t)modEntry.modBaseAddr;
 				break;
 
@@ -60,3 +59,20 @@ void Interface::GetProcessAddress()
 	}
 	CloseHandle(hSnap);
 }
+
+std::string cInterface::ReadCharPointer(PTR read_address)
+{
+	char buffer[256];
+	ReadProcessMemory(this->process_handle, (PVOID)this->ReadMemory<PTR>(read_address), &buffer, 256, 0);
+	return buffer;
+}
+
+std::string cInterface::ReadCharArray(PTR read_address)
+{
+	char buffer[256];
+	ZeroMemory(buffer, 256);
+	ReadProcessMemory(this->process_handle, (PVOID)read_address, &buffer, 256, 0);
+	return buffer;
+}
+
+cInterface * Interface = new cInterface();

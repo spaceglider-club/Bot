@@ -17,8 +17,15 @@ namespace API
 		RED	= 2
 	};
 
-	struct LocalPlayer
+	class LocalPlayer
 	{
+	public:
+
+		__inline LocalPlayer(PTR address)
+		{
+			address = this->address;
+		}
+
 		PTR address	= 0x0;
 		float attack_speed = 0.0f;
 		float total_ad = 0.0f;
@@ -33,8 +40,14 @@ namespace API
 	// For the sole purpose of performance, we are not using
 	// UnknownPlayer or AllyPlayer, only EnemyPlayer
 
-	struct EnemyPlayer
+	class EnemyPlayer
 	{
+	public:
+		__inline EnemyPlayer(PTR address)
+		{
+			address = this->address;
+		}
+
 		PTR address	= 0x0;
 		std::string champion_name = "";
 		float health = 0.0f;

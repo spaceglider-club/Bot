@@ -4,6 +4,7 @@
     <ClCompile Include="src\main.cc" />
     <ClCompile Include="src\interface.cc" />
     <ClCompile Include="src\api.cc" />
+    <ClCompile Include="src\cobject.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\interface.h" />
@@ -11,5 +12,6 @@
     <ClInclude Include="src\macro.h" />
     <ClInclude Include="src\api.h" />
     <ClInclude Include="src\vector.h" />
+    <ClInclude Include="src\cobject.h" />
   </ItemGroup>
 </Project>
