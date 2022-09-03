@@ -4,60 +4,66 @@
 #pragma once
 
 #include "macro.h"
-#include "api.h"
 #include "vector.h"
 
-#include <windows.h>
-#include <string_view>
+#include <xorstr.hpp>
+#include <string>
 
-class cCObject
+namespace CObject
 {
-public:
-	void Setup();
+	enum TEAM
+	{
+		UNKNOWN = 0,
+		BLUE = 1,
+		PURPLE = 2
+	};
 
-	PTR GetLocalPlayer();
-	float GetGameTime();
+	class LocalPlayer
+	{
+	public:
 
-	PTR GetRenderer();
-	Vector::Vector2<int> GetScreenSize();
+		__inline LocalPlayer(PTR x) : address(x) {};
 
-	PTR GetHeroList();
-	PTR GetMinionList();
+		PTR address = 0x0;
+		std::string champion_name = xorstr_("");
+		float attack_speed = 0.0f;
+		float total_ad = 0.0f;
+		float armor_penetration = 0.0f;
+		float lethality = 0.0f;
+		int ping = 0;
+		bool is_alive = false;
+		TEAM team = TEAM::UNKNOWN;
+		Vector::Vector3<float> world_position = { 0.0f, 0.0f, 0.0f };
+		Vector::Vector2<float> screen_position = { 0.0f, 0.0f };
+	};
 
-	std::string GetChampionName(PTR address);
-	float GetAttackRange();
-	float GetHealth(PTR address);
-	float GetAttackSpeed();
-	int GetPing();
-	float GetBaseAD();
-	float GetBonusAD();
-	float GetTotalAD();
-	float GetArmorPenetration();
-	float GetLethality();
-	API::TEAM GetTeam(PTR address);
-	float GetArmor(PTR address);
-	Vector::Vector3<float> GetWorldPosition(PTR address);
-	Vector::Vector2<float> GetScreenPosition(const Vector::Vector3<float>& pos);
-	Vector::Vector2<float> GetScreenPosition();
+	// For the sole purpose of performance, we are not using
+	// UnknownPlayer or AllyPlayer, only EnemyPlayer
 
+	class EnemyPlayer
+	{
+	public:
+		__inline EnemyPlayer(PTR x) : address(x) {};
 
-	bool IsTargetable(PTR address);
-	bool IsVisible(PTR address);
-	bool IsVulnerable(PTR address);
-	bool IsAlive(PTR address);
+		PTR address = 0x0;
+		std::string champion_name = xorstr_("");
+		float health = 0.0f;
+		float armor = 0.0f;
+		bool is_alive = false;
+		bool is_targetable = false;
+		bool is_visible = false;
+		bool is_vulnerable = false;
+		TEAM team = TEAM::UNKNOWN;
+		Vector::Vector3<float> world_position = { 0.0f, 0.0f, 0.0f };
+		Vector::Vector2<float> screen_position = { 0.0f, 0.0f };
+	};
 
+	void LoadLocalPlayer(LocalPlayer& local_player);
+	void LoadEnemyPlayer(EnemyPlayer& enemy_player);
 
+	void UpdateLocalPlayer(LocalPlayer& local_player);
+	void UpdateEnemyPlayer(EnemyPlayer& enemy_player);
 
-
-
-	void GetAttackSpeedOffset();
-	void GetPingOffset();
-
-	PTR kPingOffset = NULL;
-	PTR kAttackSpeedOffset = NULL;
-
-};
-extern cCObject* CObject;
-
+}
 
 #endif
