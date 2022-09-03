@@ -19,5 +19,4 @@ int __cdecl main(void*)
 {
 	Interface->Setup();
 
-
 }

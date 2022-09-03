@@ -15,7 +15,7 @@ void CObject::LoadLocalPlayer(LocalPlayer& local_player)
 	local_player.is_alive = API->IsAlive(local_player.address);
 	local_player.team = API->GetTeam(local_player.address);
 	local_player.world_position = API->GetWorldPosition(local_player.address);
-	// screen pos
+	local_player.screen_position = API->GetScreenPosition(local_player.world_position);
 }
 
 void CObject::LoadEnemyPlayer(EnemyPlayer& enemy_player)
@@ -29,7 +29,7 @@ void CObject::LoadEnemyPlayer(EnemyPlayer& enemy_player)
 	enemy_player.is_vulnerable = API->IsVulnerable(enemy_player.address);
 	enemy_player.team = API->GetTeam(enemy_player.address);
 	enemy_player.world_position = API->GetWorldPosition(enemy_player.address);
-	// screen pos
+	enemy_player.screen_position = API->GetScreenPosition(enemy_player.world_position);
 }
 
 void CObject::UpdateLocalPlayer(LocalPlayer& local_player)
