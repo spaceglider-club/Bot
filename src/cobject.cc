@@ -96,6 +96,15 @@ PTR cCObject::GetRenderer()
 	return Interface->ReadMemory<PTR>(Interface->process_address + Offsets::kRenderer);
 }
 
+Vector::Vector2<int> cCObject::GetScreenSize()
+{
+	return Vector::Vector2<int>
+	{
+		Interface->ReadMemory<int>(GetRenderer() + Offsets::kRendererWidth),
+		Interface->ReadMemory<int>(GetRenderer() + Offsets::kRendererHeight)
+	};
+}
+
 /* */
 
 PTR cCObject::GetHeroList()

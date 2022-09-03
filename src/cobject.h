@@ -19,7 +19,7 @@ public:
 	float GetGameTime();
 
 	PTR GetRenderer();
-	Vector::Vector2<float> GetScreenSize();
+	Vector::Vector2<int> GetScreenSize();
 
 	PTR GetHeroList();
 	PTR GetMinionList();
