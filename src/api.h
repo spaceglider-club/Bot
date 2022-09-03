@@ -22,10 +22,7 @@ namespace API
 	{
 	public:
 
-		__inline LocalPlayer(PTR address)
-		{
-			address = this->address;
-		}
+		__inline LocalPlayer(PTR x) : address(x) {};
 
 		PTR address	= 0x0;
 		std::string champion_name = xorstr_("");
@@ -45,10 +42,7 @@ namespace API
 	class EnemyPlayer
 	{
 	public:
-		__inline EnemyPlayer(PTR address)
-		{
-			address = this->address;
-		}
+		__inline EnemyPlayer(PTR x) : address(x) {};
 
 		PTR address	= 0x0;
 		std::string champion_name = xorstr_("");
