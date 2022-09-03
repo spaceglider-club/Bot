@@ -65,7 +65,10 @@ std::string cInterface::ReadCharPointer(PTR read_address)
 {
 	char buffer[256];
 	ReadProcessMemory(this->process_handle, (PVOID)this->ReadMemory<PTR>(read_address), &buffer, 256, 0);
+#pragma warning( push )
+#pragma warning( disable : 6054 )
 	return buffer;
+#pragma warning ( pop )
 }
 
 std::string cInterface::ReadCharArray(PTR read_address)
@@ -73,7 +76,10 @@ std::string cInterface::ReadCharArray(PTR read_address)
 	char buffer[256];
 	ZeroMemory(buffer, 256);
 	ReadProcessMemory(this->process_handle, (PVOID)read_address, &buffer, 256, 0);
+#pragma warning( push )
+#pragma warning( disable : 6054 )
 	return buffer;
+#pragma warning ( pop )
 }
 
 cInterface * Interface = new cInterface();

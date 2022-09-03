@@ -18,6 +18,7 @@ public:
 	bool IsLeagueForeGround();
 	bool IsScriptForeGround();
 	bool IsLeagueOpen();
+	bool HasGameStarted();
 
 
 };

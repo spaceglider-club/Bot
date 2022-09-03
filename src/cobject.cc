@@ -3,6 +3,10 @@
 #include "cobject.h"
 #include "interface.h"
 #include "macro.h"
+#include "offsets.h"
+#include "utils.h"
+#include "api.h"
+#include "vector.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,6 +17,7 @@ void cCObject::Setup()
 {
 	this->GetPingOffset();
 	this->GetAttackSpeedOffset();
+
 	return;
 }
 
@@ -28,7 +33,10 @@ void cCObject::GetPingOffset()
 		ZeroMemory(buffer, sizeof(buffer));
 
 		// read next 0x4000 addresses from i
+#pragma warning( push )
+#pragma warning( disable : 6387 )
 		ReadProcessMemory(Interface->process_handle, (PVOID)i, &buffer, sizeof(buffer), NULL);
+#pragma warning( pop )
 
 		for (int j = 0; j < 0x4000; j++)
 		{
@@ -50,8 +58,10 @@ void cCObject::GetAttackSpeedOffset()
     {
         static PTR buffer[16384];
 		ZeroMemory(buffer, 0x4000);
+#pragma warning( push )
+#pragma warning( disable : 6387 )
         ReadProcessMemory(Interface->process_handle, (PVOID)i, &buffer, 16384, 0);
-
+#pragma warning( pop )
         for (int j = 0; j < 0x4000; j++)
         {
             if (static_cast<int>(buffer[j] & 0x0ff) == 186)
@@ -68,5 +78,128 @@ void cCObject::GetAttackSpeedOffset()
         }
     }
 }
+
+PTR cCObject::GetLocalPlayer()
+{
+	return Interface->ReadMemory<PTR>(Interface->process_address + Offsets::kLocalPlayer);
+}
+
+float cCObject::GetGameTime()
+{
+	return Interface->ReadMemory<float>(Interface->process_address + Offsets::kGameTime);
+}
+
+/* */
+
+PTR cCObject::GetRenderer()
+{
+	return Interface->ReadMemory<PTR>(Interface->process_address + Offsets::kRenderer);
+}
+
+/* */
+
+PTR cCObject::GetHeroList()
+{
+	return Interface->ReadMemory<PTR>(Interface->process_address + Offsets::kHeroList);
+}
+
+PTR cCObject::GetMinionList()
+{
+	return Interface->ReadMemory<PTR>(Interface->process_address + Offsets::kMinionList);
+}
+
+/* */
+
+std::string cCObject::GetChampionName(PTR address)
+{
+	return Interface->ReadCharPointer(address + Offsets::kChampionName);
+}
+
+float cCObject::GetAttackRange()
+{
+	return Interface->ReadMemory<float>(GetLocalPlayer() + Offsets::kAttackRange);
+}
+
+float cCObject::GetHealth(PTR address)
+{
+	return Interface->ReadMemory<float>(address + Offsets::kHealth);
+}
+
+float cCObject::GetBaseAD()
+{
+	return Interface->ReadMemory<float>(GetLocalPlayer() + Offsets::kBaseAD);
+}
+
+float cCObject::GetBonusAD()
+{
+	return Interface->ReadMemory<float>(GetLocalPlayer() + Offsets::kBonusAD);
+}
+
+float cCObject::GetTotalAD()
+{
+	return GetBaseAD() + GetBonusAD();
+}
+
+float cCObject::GetArmorPenetration()
+{
+	return Interface->ReadMemory<float>(GetLocalPlayer() + Offsets::kArmorPenetration);
+}
+
+float cCObject::GetLethality()
+{
+	return Interface->ReadMemory<float>(GetLocalPlayer() + Offsets::kLethality);
+}
+
+API::TEAM cCObject::GetTeam(PTR address)
+{
+	return Interface->ReadMemory<int>(address + Offsets::kTeam) == 100 ? API::TEAM::BLUE : API::TEAM::PURPLE;
+}
+
+float cCObject::GetArmor(PTR address)
+{
+	return Interface->ReadMemory<float>(address + Offsets::kArmor);
+}
+
+Vector::Vector3<float> cCObject::GetWorldPosition(PTR address)
+{
+	return Vector::Vector3<float>
+	{
+		Interface->ReadMemory<float>(address + Offsets::kPosition),
+		Interface->ReadMemory<float>(address + Offsets::kPosition + 0x4),
+		Interface->ReadMemory<float>(address + Offsets::kPosition + 0x8),
+	};
+}
+
+Vector::Vector2<float> cCObject::GetScreenPosition()
+{
+	return {};
+}
+
+/* */
+
+bool cCObject::IsTargetable(PTR address)
+{
+	return Interface->ReadMemory<int>(address + Offsets::kIsTargetable) == 1 ? true : false;
+}
+
+bool cCObject::IsVisible(PTR address)
+{
+	return static_cast<INT8>(Interface->ReadMemory<int>(address + Offsets::kIsVisible)) == 1 ? true : false;
+}
+
+bool cCObject::IsVulnerable(PTR address)
+{
+	return Interface->ReadMemory<int>(address + Offsets::kIsVulnerable) == 0 ? true : false;
+}
+
+bool cCObject::IsAlive(PTR address)
+{
+	return GetHealth(address) > 0.0f ? true : false;
+}
+
+
+
+
+
 
 cCObject* CObject = new cCObject();

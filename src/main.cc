@@ -8,6 +8,7 @@
 #include "offsets.h"
 #include "vector.h"
 #include "cobject.h"
+#include "utils.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -17,5 +18,5 @@
 int __cdecl main(void*)
 {
 	Interface->Setup();
-
+	std::cout << CObject->GetChampionName(CObject->GetLocalPlayer());
 }

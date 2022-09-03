@@ -14,8 +14,8 @@ namespace API
 	enum TEAM
 	{
 		UNKNOWN = 0,
-		PURPLE	= 1,
-		RED	= 2
+		BLUE	= 1,
+		PURPLE	= 2
 	};
 
 	class LocalPlayer

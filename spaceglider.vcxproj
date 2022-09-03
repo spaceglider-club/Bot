@@ -11,6 +11,7 @@
     <ClCompile Include="src\cobject.cc" />
     <ClCompile Include="src\interface.cc" />
     <ClCompile Include="src\main.cc" />
+    <ClCompile Include="src\threads.cc" />
     <ClCompile Include="src\utils.cc" />
   </ItemGroup>
   <ItemGroup>
@@ -19,6 +20,7 @@
     <ClInclude Include="src\interface.h" />
     <ClInclude Include="src\macro.h" />
     <ClInclude Include="src\offsets.h" />
+    <ClInclude Include="src\threads.h" />
     <ClInclude Include="src\utils.h" />
     <ClInclude Include="src\vector.h" />
   </ItemGroup>

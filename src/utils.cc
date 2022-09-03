@@ -2,6 +2,7 @@
 
 #include "utils.h"
 #include "interface.h"
+#include "offsets.h"
 
 #include <Windows.h>
 #include <string>
@@ -100,9 +101,15 @@ bool cUtils::RenameApp()
 
 bool cUtils::IsLeagueOpen()
 {
+	if (Interface->process_id < 1)
+		return false;
+	else
+		return true;
+}
 
-	Interface->process_id;
-	return 0;
+bool cUtils::HasGameStarted()
+{
+	return Interface->ReadMemory<float>(Interface->process_address + Offsets::kGameTime) < 1 ? false : true;
 }
 
 cUtils* Utils = new cUtils();

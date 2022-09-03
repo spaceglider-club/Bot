@@ -4,6 +4,7 @@
 
 void API::LoadLocalPlayer(LocalPlayer& local_player)
 {
+
 }
 
 void API::LoadEnemyPlayer(EnemyPlayer& enemy_player)
