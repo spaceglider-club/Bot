@@ -37,6 +37,7 @@ public:
 	API::TEAM GetTeam(PTR address);
 	float GetArmor(PTR address);
 	Vector::Vector3<float> GetWorldPosition(PTR address);
+	Vector::Vector2<float> GetScreenPosition(const Vector::Vector3<float>& pos);
 	Vector::Vector2<float> GetScreenPosition();
 
 

@@ -8,10 +8,9 @@
 #include "api.h"
 #include "vector.h"
 
-#include <stdio.h>
-#include <stdlib.h>
 #include <iostream>
 #include <xorstr.hpp>
+#include <DirectXMath.h>
 
 void cCObject::Setup()
 {
@@ -191,7 +190,11 @@ Vector::Vector3<float> cCObject::GetWorldPosition(PTR address)
 
 Vector::Vector2<float> cCObject::GetScreenPosition()
 {
-	return {};
+	return Vector::Vector2<float>
+	{
+		Interface->ReadMemory<float>(GetRenderer() + Offsets::kRendererWidth),
+		Interface->ReadMemory<float>(GetRenderer() + Offsets::kRendererHeight)
+	};
 }
 
 /* */
@@ -216,7 +219,56 @@ bool cCObject::IsAlive(PTR address)
 	return GetHealth(address) > 0.0f ? true : false;
 }
 
+DirectX::XMMATRIX ReadMatrix(uintptr_t address)
+{
+	DirectX::XMMATRIX tempmatrix;
+	for (int i = 0; i < 16; i++)
+	{
+		tempmatrix.r->m128_f32[i] = Interface->ReadMemory<float>(address + sizeof(float) * i);
+	}
+	return tempmatrix;
+}
 
+DirectX::XMMATRIX ViewMatrix()
+{
+	return ReadMatrix(Interface->process_address + Offsets::kViewProjectionMatrix);
+}
+
+DirectX::XMMATRIX ProjectionMatrix()
+{
+	return ReadMatrix(Interface->process_address + Offsets::kViewProjectionMatrix + 0x40);
+}
+
+DirectX::XMMATRIX GetViewProj()
+{
+	return DirectX::XMMatrixMultiply(ViewMatrix(), ProjectionMatrix());
+}
+
+Vector::Vector2<float> cCObject::GetScreenPosition(const Vector::Vector3<float>& pos)
+{
+	Vector::Vector2<int> screen = GetScreenSize();
+	DirectX::XMMATRIX matrix = GetViewProj();
+	Vector::Vector2<float> returnValue{ 0.0f, 0.0f };
+
+
+	Vector::Vector4<float> cords;
+	cords.x = pos.x * matrix.r->m128_f32[0] + pos.y * matrix.r->m128_f32[4] + pos.z * matrix.r->m128_f32[8] + matrix.r->m128_f32[12];
+	cords.y = pos.x * matrix.r->m128_f32[1] + pos.y * matrix.r->m128_f32[5] + pos.z * matrix.r->m128_f32[9] + matrix.r->m128_f32[13];
+	cords.z = pos.x * matrix.r->m128_f32[2] + pos.y * matrix.r->m128_f32[6] + pos.z * matrix.r->m128_f32[10] + matrix.r->m128_f32[14];
+	cords.w = pos.x * matrix.r->m128_f32[3] + pos.y * matrix.r->m128_f32[7] + pos.z * matrix.r->m128_f32[11] + matrix.r->m128_f32[15];
+
+	if (cords.w < 0.1f) return returnValue;
+
+	Vector::Vector3<float> tempr;
+	tempr.x = cords.x / cords.w;
+	tempr.y = cords.y / cords.w;
+	tempr.z = cords.z / cords.w;
+
+	returnValue.x = (screen.x / 2 * tempr.x) + (tempr.x + screen.x / 2);
+	returnValue.y = -(screen.y / 2 * tempr.y) + (tempr.y + screen.y / 2);
+
+	return returnValue;
+}
 
 
 
