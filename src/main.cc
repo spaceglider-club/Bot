@@ -18,8 +18,6 @@
 int __cdecl main(void*)
 {
 	Interface->Setup();
-	API::LocalPlayer lp(CObject->GetLocalPlayer());
-	API::LoadLocalPlayer(lp);
-	std::cout << lp.champion_name << std::endl;
+
 
 }
