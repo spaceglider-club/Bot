@@ -30,6 +30,7 @@ namespace API
 		float total_ad = 0.0f;
 		float armor_penetration	= 0.0f;
 		float lethality	= 0.0f;
+		int ping = 0;
 		bool is_alive = false;
 		TEAM team = TEAM::UNKNOWN;
 		Vector::Vector3<float> world_position = { 0.0f, 0.0f, 0.0f };

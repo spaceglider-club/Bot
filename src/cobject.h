@@ -27,6 +27,8 @@ public:
 	std::string GetChampionName(PTR address);
 	float GetAttackRange();
 	float GetHealth(PTR address);
+	float GetAttackSpeed();
+	int GetPing();
 	float GetBaseAD();
 	float GetBonusAD();
 	float GetTotalAD();

@@ -134,6 +134,16 @@ float cCObject::GetHealth(PTR address)
 	return Interface->ReadMemory<float>(address + Offsets::kHealth);
 }
 
+float cCObject::GetAttackSpeed()
+{
+	return Interface->ReadMemory<float>(this->kAttackSpeedOffset);
+}
+
+int cCObject::GetPing()
+{
+	return Interface->ReadMemory<int>(this->kPingOffset);
+}
+
 float cCObject::GetBaseAD()
 {
 	return Interface->ReadMemory<float>(GetLocalPlayer() + Offsets::kBaseAD);
