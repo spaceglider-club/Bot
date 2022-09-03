@@ -17,6 +17,7 @@ public:
 	std::wstring stow(std::string str);
 	bool IsLeagueForeGround();
 	bool IsScriptForeGround();
+	bool IsLeagueOpen();
 
 
 };

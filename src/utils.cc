@@ -98,4 +98,11 @@ bool cUtils::RenameApp()
 	else return false;
 }
 
+bool cUtils::IsLeagueOpen()
+{
+
+	Interface->process_id;
+	return 0;
+}
+
 cUtils* Utils = new cUtils();
