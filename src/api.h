@@ -6,9 +6,15 @@
 #include "macro.h"
 #include "cobject.h"
 #include "vector.h"
+#include "cobject.h"
 
 #include <windows.h>
 #include <string_view>
+
+namespace Objects
+{
+	inline CObject::LocalPlayer localPlayer;
+}
 
 class cAPI
 {

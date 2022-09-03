@@ -12,10 +12,13 @@
 #include <xorstr.hpp>
 #include <DirectXMath.h>
 
+
+
 void cAPI::Setup()
 {
 	this->GetPingOffset();
 	this->GetAttackSpeedOffset();
+	Objects::localPlayer = CObject::LocalPlayer(this->GetLocalPlayer());
 
 	return;
 }
@@ -301,7 +304,5 @@ float next_hit_dmg(float armor)
 	float damageOnHit = atkDamage * (100 / (100 + enemyArmor));
 	return damageOnHit;
 }*/
-
-
 
 cAPI* API = new cAPI();

@@ -23,6 +23,7 @@ namespace CObject
 	public:
 
 		__inline LocalPlayer(PTR x) : address(x) {};
+		__inline LocalPlayer() {};
 
 		PTR address = 0x0;
 		std::string champion_name = xorstr_("");
