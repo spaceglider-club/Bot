@@ -7,6 +7,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
+#include <xorstr.hpp>
+
+void cCObject::Setup()
+{
+	this->GetPingOffset();
+	this->GetAttackSpeedOffset();
+	return;
+}
 
 // search through memory blocks until found the pointer combination (takes about 2-10 seconds depending on PC)
 void cCObject::GetPingOffset()
@@ -48,9 +56,9 @@ void cCObject::GetAttackSpeedOffset()
         {
             if (static_cast<int>(buffer[j] & 0x0ff) == 186)
             {
-				if (strcmp(Interface->ReadCharPointer((i + ((j - 3) * 4))).c_str(), "game_DynamicMenuText_[Attributes]_AttackSpeedWithRatio") == 0)
+				if (strcmp(Interface->ReadCharPointer((i + ((j - 3) * 4))).c_str(), xorstr_("game_DynamicMenuText_[Attributes]_AttackSpeedWithRatio")) == 0)
 				{
-					if (strcmp(Interface->ReadCharPointer((i + ((j + 62) * 4))).c_str(), "game_DynamicMenuText_[Attributes]_LifeSteal") == 0)
+					if (strcmp(Interface->ReadCharPointer((i + ((j + 62) * 4))).c_str(), xorstr_("game_DynamicMenuText_[Attributes]_LifeSteal")) == 0)
 					{
 						this->kAttackSpeedOffset = (i + (j * 4)) - 0x14;
 						return;

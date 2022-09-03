@@ -5,6 +5,7 @@
 #include <windows.h>
 #include <tlhelp32.h>
 #include <comdef.h>
+#include <xorstr.hpp>
 
 void cInterface::Setup()
 {
@@ -24,7 +25,7 @@ void cInterface::GetProcessId()
 	{
 		while (Process32Next(snapshot, &entry) == TRUE)
 		{
-			if (_stricmp(_bstr_t(entry.szExeFile), "League of Legends.exe") == 0)
+			if (_stricmp(_bstr_t(entry.szExeFile), xorstr_("League of Legends.exe")) == 0)
 			{
 				this->process_id = entry.th32ProcessID;
 			}

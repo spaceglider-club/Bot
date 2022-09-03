@@ -6,6 +6,7 @@
 #include "macro.h"
 #include "vector.h"
 
+#include <xorstr.hpp>
 #include <string>
 
 namespace API
@@ -27,6 +28,7 @@ namespace API
 		}
 
 		PTR address	= 0x0;
+		std::string champion_name = xorstr_("");
 		float attack_speed = 0.0f;
 		float total_ad = 0.0f;
 		float armor_penetration	= 0.0f;
@@ -49,7 +51,7 @@ namespace API
 		}
 
 		PTR address	= 0x0;
-		std::string champion_name = "";
+		std::string champion_name = xorstr_("");
 		float health = 0.0f;
 		float armor = 0.0f;
 		bool is_alive = false;

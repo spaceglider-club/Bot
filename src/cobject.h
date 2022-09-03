@@ -11,6 +11,7 @@
 class cCObject
 {
 public:
+	void Setup();
 	PTR getLocalPlayer();
 	std::string GetChampionName();
 

@@ -18,6 +18,4 @@ int __cdecl main(void*)
 {
 	Interface->Setup();
 
-	CObject->GetAttackSpeedOffset();
-	printf("0x%x\n", CObject->kAttackSpeedOffset);
 }
