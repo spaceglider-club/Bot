@@ -2,7 +2,6 @@
 // https://google.github.io/styleguide/cppguide.html
 // Start Date: 30.08.2022 (5:11 am)
 // Author: souljah#7777 @ spaceglider.club
-// Sharing, modification of this source code is strictly forbidden unless given permission by the Author.
 
 #include "interface.h"
 #include "offsets.h"
